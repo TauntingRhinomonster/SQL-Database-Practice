@@ -1,24 +1,37 @@
-// let http = require('http');
-// http.createServer(function (req, res) {
-//     res.writeHead(200, {'content-type': 'text/html'});
-//     res.end('Hello World!');
-// }).listen(8000);
-
+const express = require('express');
+const app = express();
 const { Pool } = require('pg');
-require('dotenv').config();
 
 const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "practice",
-    port: "5432",
-    password: "SeQuel!0!_RB25"
+    host: 'localhost',
+    user: 'postgres',
+    database: 'practice',
+    password: 'SeQuel!0!_RB25'
 })
 
-pool.connect()
-.then(() => {console.log("connected to pg")})
-.catch(() => {
-    console.log("Can't connect to pg")
-})
+app.use(express.json());
+app.use(express.static(__dirname));
 
-module.exports = { Pool }
+app.post('/', async (req, res) => {
+    const incomingName = req.body.userName;
+    const incomingPassword = req.body.userPassword;
+    const incomingEmail = req.body.userEmail;
+
+    console.log(`
+        We recieved a req to log the following information: 
+        username: ${incomingName}
+        password: ${incomingPassword}
+        email: ${incomingEmail}
+    `);
+
+    const query = `INSERT INTO users (username, password, email) VALUES ($1, $2, $3)`;
+    const values = [incomingName, incomingPassword, incomingEmail];
+
+    await pool.query(query, values);
+    
+    res.status(201).send('Information Saved!');
+});
+
+app.listen(3000, () => {
+    console.log("Server is listening for requests on port 3000...");
+});

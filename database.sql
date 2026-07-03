@@ -1,12 +1,13 @@
-DROP TABLES IF EXISTS friends;
+DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     favorite_color VARCHAR(30),
-    age DECIMAL(3)
+    age INTEGER
 );
 
 CREATE TABLE friends (
