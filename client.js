@@ -22,7 +22,24 @@ document.querySelector('#submitBtn').addEventListener('click', async (e) => {
 
         const serverReply = await response.json();
         console.log("Server says:", serverReply.message);
+        username.value = "";
+        username.value = "";
+        username.value = "";
     } catch (err) {
         console.error("Failed to send user data:", err);
     }
+});
+
+document.querySelector('#display-tables-btn').addEventListener('click', async (e) => {
+    const URL = 'https://jsonplaceholder.typicode.com/users';
+    // fetch(URL)
+    // .then((response) => {
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP ERROR. Status ${response.status}`);
+    //     }
+    //     return response.json();
+    // })
+    // .then((data) => console.log(data))
+    // .catch((err) => console.log(err));
+    fetch(URL).then(console.log("We did it people!")).catch((err) => console.log(err));
 });

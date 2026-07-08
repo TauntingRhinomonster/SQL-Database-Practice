@@ -12,6 +12,11 @@ const pool = new Pool({
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// make a get request here...
+app.get('/', (req, res) => {
+    res.send("Hello World!");
+});
+
 app.post('/', async (req, res) => {
     const incomingName = req.body.userName;
     const incomingPassword = req.body.userPassword;
