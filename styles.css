@@ -47,3 +47,12 @@ button {
     padding: 0.5rem 1rem;
     cursor: pointer;
 }
+
+#user-list {
+    color: white;
+    list-style-position: inside;
+}
+
+#user-list li {
+    color: white;
+}
